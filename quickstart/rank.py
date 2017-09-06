@@ -24,7 +24,7 @@ def rank(result_predict):
 
 	city_rank=result_rank.tolist()
 
-	readCities = open('./cities.txt', 'r')
+	readCities = open('/home/ubuntu/workspace/lookbook/lookbook_server/quickstart/cities.txt', 'r')
 	citiesList = readCities.read().split('\n')
 
 	for i in range(5):
