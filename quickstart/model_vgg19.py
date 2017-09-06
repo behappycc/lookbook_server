@@ -13,7 +13,7 @@ K.set_image_dim_ordering('th')
 
 from keras.models import Sequential, Model
 from keras.layers import Dense, Dropout, Activation, Flatten, Input
-from keras.layers import Conv2D, MaxPooling2D, ZeroPadding2D
+from keras.layers import Convolution2D, MaxPooling2D, ZeroPadding2D
 from keras.utils import np_utils
 from keras.optimizers import SGD, Adagrad
 from keras.callbacks import EarlyStopping,ModelCheckpoint
