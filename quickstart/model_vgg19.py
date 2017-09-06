@@ -19,6 +19,8 @@ from keras.optimizers import SGD, Adagrad
 from keras.callbacks import EarlyStopping,ModelCheckpoint
 from keras import initializers
 
+import os
+
 
 import matplotlib
 import time
@@ -29,6 +31,7 @@ from keras.utils.io_utils import HDF5Matrix
 
 from keras import backend as K
 import os
+
 
 
 
@@ -149,9 +152,14 @@ def vgg19(X_train):
 		              # metrics=['accuracy'])
 
 	print('Loading weights......')
-	model.load_weights('./quickstart/weights/Best_ModelAPI_SGD_weights.h5')
+    # PROJECT_PATH = os.path.realpath('/home/ubuntu/workspace/lookbook/lookbook_server/quickstart/weigths/Best_ModelAPI_SGD_weights.h5')
+	
+	model.load_weights('/home/ubuntu/workspace/lookbook/lookbook_server/quickstart/weigths/Best_ModelAPI_SGD_weights.h5')
+	# model.load_weights(PROJECT_PATH)
 	print("Loaded model from disk")
 	predict = model.predict(X_train, batch_size=batch_size, verbose=0)
+    
+	
 	# pre_class=model.predict_classes(X_train, batch_size=batch_size, verbose=1)
 	# pre_proba=model.predict_proba(X_train, batch_size=batch_size, verbose=1)
 
