@@ -24,8 +24,13 @@ import matplotlib
 import time
 import cPickle
 
+import h5py
+from keras.utils.io_utils import HDF5Matrix
+
 from keras import backend as K
 import os
+
+
 
 def set_keras_backend(backend):
 
