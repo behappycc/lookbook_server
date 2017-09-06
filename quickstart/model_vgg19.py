@@ -149,7 +149,7 @@ def vgg19(X_train):
 		              # metrics=['accuracy'])
 
 	print('Loading weights......')
-	model.load_weights('./weights/Best_ModelAPI_SGD_weights.h5')
+	model.load_weights('./quickstart/weights/Best_ModelAPI_SGD_weights.h5')
 	print("Loaded model from disk")
 	predict = model.predict(X_train, batch_size=batch_size, verbose=0)
 	# pre_class=model.predict_classes(X_train, batch_size=batch_size, verbose=1)
