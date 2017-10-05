@@ -1,4 +1,5 @@
 import re
+import os
 import cgi
 import json
 import copy
@@ -13,6 +14,7 @@ from quickstart.rank import rank
 import numpy as np
 from quickstart.imgur import imgurRequests
 import cStringIO
+import requests
 
 
 # regelar expression
@@ -73,6 +75,18 @@ class FileUploadView(views.APIView):
                 ['imgUrl', url],
             	['rank', city_rank],
             ])
+
+
+            url = "https://api.airtable.com/v0/appLqa1uJ8iUbOdKY/FWM_Data"
+
+            headers = {
+                'authorization': "Bearer {}".format(os.environ['APIKEY']),
+                'content-type': "application/json",
+            }
+
+            requests.request("POST", url, data=json.dumps(response), headers=headers)
+
+
             return Response(response, status=200)
         except Exception, e:
             print e
