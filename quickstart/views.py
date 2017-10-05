@@ -58,7 +58,8 @@ class FileUploadView(views.APIView):
             # Imgur upload
             image_chunk = file_obj.read()
             url = imgurRequests(image_chunk)
-            
+            print '~~~~~!!!!!~~~~'
+
             # vgg model
             img = Image.open(file_obj_copy)
             process = preprocess(img)
