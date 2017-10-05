@@ -85,6 +85,7 @@ class FileUploadView(views.APIView):
             }
 
             r = requests.request("POST", url, data=json.dumps(response), headers=headers)
+            print '~~~~~~~~~~~~~~~~~~~~~~~~'
             print r.text
 
             return Response(response, status=200)
