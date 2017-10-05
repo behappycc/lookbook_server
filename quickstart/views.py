@@ -58,7 +58,7 @@ class FileUploadView(views.APIView):
             # Imgur upload
             image_chunk = file_obj.read()
             url = imgurRequests(image_chunk)
-            print '~~~~~!!!!!~~~~'
+            print '~~~~~!!!!!~~~~~~~~~~~~~~~'
 
             # vgg model
             img = Image.open(file_obj_copy)
@@ -76,7 +76,6 @@ class FileUploadView(views.APIView):
             	['rank', city_rank],
             ])
 
-            print '~~~~~!!!!!~~~~'
             url = "https://api.airtable.com/v0/appLqa1uJ8iUbOdKY/FWM_Data"
 
             headers = {
