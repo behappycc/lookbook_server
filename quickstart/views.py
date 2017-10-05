@@ -63,7 +63,7 @@ class FileUploadView(views.APIView):
             # vgg model
             img = Image.open(file_obj_copy)
             process = preprocess(img)
-            result_predict = vgg19(process)
+            # result_predict = vgg19(process)
             raw_city_rank = rank(result_predict)
             city_rank = [{ 'name': city_name, 'prob': prob } for city_name, prob in raw_city_rank]
 
