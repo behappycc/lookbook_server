@@ -75,7 +75,7 @@ class FileUploadView(views.APIView):
             	['rank', city_rank],
             ])
 
-            print '~~~~~~~~~~~~~~~~~~~~~~~~'
+            print '~~~~~!!!!!~~~~'
             url = "https://api.airtable.com/v0/appLqa1uJ8iUbOdKY/FWM_Data"
 
             headers = {
@@ -85,7 +85,7 @@ class FileUploadView(views.APIView):
 
             r = requests.request("POST", url, data=json.dumps(response), headers=headers)
             print r.text
-            print '~~~~~~~~~~~~~~~~~~~~~~~~'
+            print '~~~~~!!!!!~~~~'
 
             return Response(response, status=200)
         except Exception, e:
