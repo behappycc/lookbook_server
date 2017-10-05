@@ -58,12 +58,11 @@ class FileUploadView(views.APIView):
             # Imgur upload
             image_chunk = file_obj.read()
             url = imgurRequests(image_chunk)
-            print '~~~~~!!!!!~~~~~~~~~~~~~~~'
 
             # vgg model
             img = Image.open(file_obj_copy)
             process = preprocess(img)
-            # result_predict = vgg19(process)
+            result_predict = vgg19(process)
             raw_city_rank = rank(result_predict)
             city_rank = [{ 'name': city_name, 'prob': prob } for city_name, prob in raw_city_rank]
 
@@ -85,7 +84,6 @@ class FileUploadView(views.APIView):
 
             r = requests.request("POST", url, data=json.dumps(response), headers=headers)
             print r.text
-            print '~~~~~!!!!!~~~~'
 
             return Response(response, status=200)
         except Exception, e:
