@@ -55,7 +55,6 @@ class FileUploadView(views.APIView):
             file_obj = request.data['image']
             file_obj_copy = copy.deepcopy(file_obj)
 
-
             # Imgur upload
             image_chunk = file_obj.read()
             url = imgurRequests(image_chunk)
@@ -76,8 +75,7 @@ class FileUploadView(views.APIView):
             	['rank', city_rank],
             ])
 
-            print '~~~~~~~~~~~~~~~~~~~~~~~~!!!!!!!!!!!'
-
+            print '~~~~~~~~~~~~~~~~~~~~~~~~'
             url = "https://api.airtable.com/v0/appLqa1uJ8iUbOdKY/FWM_Data"
 
             headers = {
@@ -86,8 +84,8 @@ class FileUploadView(views.APIView):
             }
 
             r = requests.request("POST", url, data=json.dumps(response), headers=headers)
-            print '~~~~~~~~~~~~~~~~~~~~~~~~!!!!!!!!!!!'
             print r.text
+            print '~~~~~~~~~~~~~~~~~~~~~~~~'
 
             return Response(response, status=200)
         except Exception, e:
