@@ -84,8 +84,8 @@ class FileUploadView(views.APIView):
                 'content-type': "application/json",
             }
 
-            requests.request("POST", url, data=json.dumps(response), headers=headers)
-
+            r = requests.request("POST", url, data=json.dumps(response), headers=headers)
+            print r.text
 
             return Response(response, status=200)
         except Exception, e:
