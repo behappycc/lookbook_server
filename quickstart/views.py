@@ -74,16 +74,24 @@ class FileUploadView(views.APIView):
                 ['imgUrl', url],
             	['rank', city_rank],
             ])
+            
 
+            print('~~~~~~~!!!~~~~~~')
+            
             url = "https://api.airtable.com/v0/appLqa1uJ8iUbOdKY/FWM_Data"
-
+            
             headers = {
                 'authorization': "Bearer {}".format(os.environ['APIKEY']),
                 'content-type': "application/json",
             }
+            
+            airtableFields = {
+                'fields': response,
+            }
 
-            r = requests.request("POST", url, data=json.dumps(response), headers=headers)
+            r = requests.request("POST", url, data=json.dumps(airtableFields), headers=headers)
             print r.text
+            print('~~~~~~~!!!~~~~~~')
 
             return Response(response, status=200)
         except Exception, e:
