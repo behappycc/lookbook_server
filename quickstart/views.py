@@ -90,6 +90,7 @@ class FileUploadView(views.APIView):
             }
 
             r = requests.request("POST", url, data=json.dumps(airtableFields), headers=headers)
+            print r.request.body
             print r.text
             print('~~~~~~~!!!~~~~~~')
 
