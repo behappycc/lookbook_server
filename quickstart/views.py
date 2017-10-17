@@ -133,5 +133,5 @@ class GetUserView(generics.RetrieveAPIView):
 
         print(content)
 
-        return Response(content)
+        return Response(content, status=200)
 
