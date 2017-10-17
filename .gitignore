@@ -1,2 +1,6 @@
 Best_ModelAPI_SGD_weights.h5
 depoly.sh
+
+.idea/
+
+**.pyc

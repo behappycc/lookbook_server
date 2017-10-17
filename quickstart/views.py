@@ -56,15 +56,28 @@ class FileUploadView(views.APIView):
             file_obj_copy = copy.deepcopy(file_obj)
 
             # Imgur upload
-            image_chunk = file_obj.read()
-            url = imgurRequests(image_chunk)
+            # image_chunk = file_obj.read()
+            # url = imgurRequests(image_chunk)
 
             # vgg model
-            img = Image.open(file_obj_copy)
-            process = preprocess(img)
-            result_predict = vgg19(process)
-            raw_city_rank = rank(result_predict)
-            city_rank = [{ 'name': city_name, 'prob': prob } for city_name, prob in raw_city_rank]
+            # img = Image.open(file_obj_copy)
+            # process = preprocess(img)
+            # result_predict = vgg19(process)
+            # raw_city_rank = rank(result_predict)
+            # city_rank = [{ 'name': city_name, 'prob': prob } for city_name, prob in raw_city_rank]
+
+            # response = OrderedDict([
+            #     ['age', age],
+            #     ['gender', gender],
+            #     ['country', country],
+            #     ['city', city],
+            #     ['imgUrl', url],
+            # 	['rank', city_rank],
+            # ])
+
+            url = 'test_url'
+
+            city_rank = [{'name': 'taiwan', 'prob': 50}, {'name': 'china', 'prob': 50}]
 
             response = OrderedDict([
                 ['age', age],
@@ -72,27 +85,10 @@ class FileUploadView(views.APIView):
                 ['country', country],
                 ['city', city],
                 ['imgUrl', url],
-            	['rank', city_rank],
+                ['rank', city_rank],
             ])
-            
 
-            print('~~~~~~~!!!~~~~~~')
-            
-            url = "https://api.airtable.com/v0/appLqa1uJ8iUbOdKY/FWM_Data"
-            
-            headers = {
-                'authorization': "Bearer {}".format(os.environ['APIKEY']),
-                'content-type': "application/json",
-            }
-            
-            airtableFields = {
-                'fields': response,
-            }
-
-            r = requests.request("POST", url, data=json.dumps(airtableFields), headers=headers)
-            print r.request.body
-            # print r.text
-            print('~~~~~~~!!!~~~~~~')
+            print(response)
 
             return Response(response, status=200)
         except Exception, e:
