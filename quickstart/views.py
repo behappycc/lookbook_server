@@ -47,11 +47,10 @@ class FileUploadView(views.APIView):
                 message = ', '.join(missing_fields)
                 return Response({'message': 'Missing fields: ' + message}, status=400)
 
-            age = request.data['age']
-            gender = request.data['gender']
-            country = request.data['country']
-            city = request.data['city']
-
+            age = request.data['age'].encode("utf-8")
+            gender = request.data['gender'].encode("utf-8")
+            country = request.data['country'].encode("utf-8")
+            city = request.data['city'].encode("utf-8")
 
             file_obj = request.data['image']
             file_obj_copy = copy.deepcopy(file_obj)
@@ -76,9 +75,10 @@ class FileUploadView(views.APIView):
             # 	['rank', city_rank],
             # ])
 
-            url = 'test_url'
+            url = 'http://test/url'
 
             city_rank = [{'name': 'taiwan', 'prob': 50}, {'name': 'china', 'prob': 50}]
+            city_rank_to_db = 'taiwan,50;china,50;'
 
             response = OrderedDict([
                 ['age', age],
@@ -95,7 +95,7 @@ class FileUploadView(views.APIView):
                 country=country,
                 city=city,
                 imgUrl=url,
-                rank=rank
+                rank=city_rank_to_db
             )
 
             print(response)

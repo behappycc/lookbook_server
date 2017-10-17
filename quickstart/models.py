@@ -4,7 +4,7 @@ from django.db import models
 
 # Create your models here.
 class User(models.Model):
-    age = models.DecimalField(max_digits=3, decimal_places=2)
+    age = models.CharField(max_length=4)
     gender = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
