@@ -113,13 +113,13 @@ class GetUserView(generics.RetrieveAPIView):
     Get User info by id
     """
     def get(self, request, id, format=None):
-        user = User.objects.filter(id=id)
+        user = User.objects.get(id=id)
         city_rank = user.rank.split(';')
 
         obj = []
         for city in city_rank:
             if city:
-                obj.append({city.split(',')[0], city.split(',')[1]})
+                obj.append({'name': city.split(',')[0], 'prob': city.split(',')[1]})
 
         content = {
             'id': str(user.id),
@@ -130,6 +130,8 @@ class GetUserView(generics.RetrieveAPIView):
             'imgUrl': user.imgUrl,
             'rank': obj,
         }
+
+        print(content)
 
         return Response(content)
 
