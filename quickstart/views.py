@@ -15,6 +15,7 @@ import numpy as np
 from quickstart.imgur import imgurRequests
 import cStringIO
 import requests
+from models import User
 
 
 # regelar expression
@@ -87,6 +88,15 @@ class FileUploadView(views.APIView):
                 ['imgUrl', url],
                 ['rank', city_rank],
             ])
+
+            User.objects.create(
+                age=age,
+                gender=gender,
+                country=country,
+                city=city,
+                imgUrl=url,
+                rank=rank
+            )
 
             print(response)
 
