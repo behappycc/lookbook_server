@@ -17,6 +17,7 @@ import cStringIO
 import requests
 from models import User
 
+from rest_framework import generics
 
 # regelar expression
 # r'^.+@.+\..+$'
@@ -26,6 +27,7 @@ fields = {
     'country': r'.',
     'city': r'.+'
 }
+
 
 class FileUploadView(views.APIView):
     def post(self, request, filename, format=None):
@@ -104,6 +106,30 @@ class FileUploadView(views.APIView):
         except Exception, e:
             print e
             return Response({'message': 'Error occurs'}, status=500)
-            
 
+
+class GetUserView(generics.RetrieveAPIView):
+    """
+    Get User info by id
+    """
+    def get(self, request, id, format=None):
+        user = User.objects.filter(id=id)
+        city_rank = user.rank.split(';')
+
+        obj = []
+        for city in city_rank:
+            if city:
+                obj.append({city.split(',')[0], city.split(',')[1]})
+
+        content = {
+            'id': str(user.id),
+            'age': user.age,
+            'gender': user.gender,
+            'country': user.country,
+            'city': user.city,
+            'imgUrl': user.imgUrl,
+            'rank': obj,
+        }
+
+        return Response(content)
 
