@@ -66,10 +66,11 @@ class FileUploadView(views.APIView):
 
             print(age, gender, country, city)
 
-            url = 'https://imgur.com/Sc59JV1'
+            url = 'https://i.imgur.com/Sc59JV1.jpg'
 
-            city_rank = [{'name': 'taiwan', 'prob': 50}, {'name': 'china', 'prob': 50}]
-            city_rank_to_db = 'taiwan,50;china,50;'
+            city_rank = [{"name":"Rio De Janeiro","prob":44.8},{"name":"Prague","prob":24.1},{"name":"Helsinki","prob":8.4},{"name":"Casablanca","prob":4.7},{"name":"Berlin","prob":3.0},{"name":"others:","prob":15.0}]
+            # city_rank_to_db = 'taiwan,50;china,50;'
+            city_rank_to_db = 'Rio De Janeiro,44.8;Prague,24.1;Helsinki,8.4;Casablanca,4.7;Berlin,3.0;others,15.0'
 
             response = OrderedDict([
                 ['age', age],
