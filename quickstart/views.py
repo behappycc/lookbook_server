@@ -40,10 +40,17 @@ class FileUploadView(views.APIView):
             country = body['country']
             city = body['city']
 
+            file_obj = body['imgUrl'].encode('utf-8q')
+            print(file_obj)
+
+            # Imgur upload
+            image_chunk = file_obj.read()
+            print(image_chunk)
+
             # TODO: url and rank should be replaced with the Imgur url and vgg model prediction
             url = 'https://i.imgur.com/Sc59JV1.jpg'
 
-            # city_rank = [{"name":"Rio De Janeiro","prob":44.8},{"name":"Prague","prob":24.1},{"name":"Helsinki","prob":8.4},{"name":"Casablanca","prob":4.7},{"name":"Berlin","prob":3.0},{"name":"others:","prob":15.0}]
+            # rank should be transform to this structure
             city_rank_to_db = 'Rio De Janeiro,44.8;Prague,24.1;Helsinki,8.4;Casablanca,4.7;Berlin,3.0;others,15.0'
 
             user = User.objects.create(
