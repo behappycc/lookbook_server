@@ -30,32 +30,11 @@ fields = {
 
 
 class FileUploadView(views.APIView):
-    def post(self, request, filename, format=None):
+    def post(self, request, format=None):
         try:
-            missing_fields = []
-            for field, regex in fields.items():
-                try:
-                    data = request.data[field]
-                    reg = re.match(regex, data)
-                    if (reg is None):
-                        missing_fields.append(field)
-                except Exception, e:
-                    print e
-                    missing_fields.append(field)
-            
-            if missing_fields != []:
-                print 'missing_fields:'
-                print missing_fields
-                message = ', '.join(missing_fields)
-                return Response({'message': 'Missing fields: ' + message}, status=400)
 
-            age = request.data['age'].encode("utf-8")
-            gender = request.data['gender'].encode("utf-8")
-            country = request.data['country'].encode("utf-8")
-            city = request.data['city'].encode("utf-8")
-
-            file_obj = request.data['image']
-            file_obj_copy = copy.deepcopy(file_obj)
+            # file_obj = request.data['image']
+            # file_obj_copy = copy.deepcopy(file_obj)
 
             # Imgur upload
             # image_chunk = file_obj.read()
@@ -77,7 +56,17 @@ class FileUploadView(views.APIView):
             # 	['rank', city_rank],
             # ])
 
-            url = 'http://test/url'
+            body_unicode = request.body.decode('utf-8')
+            body = json.loads(body_unicode)
+
+            age = body['age']
+            gender = body['gender']
+            country = body['country']
+            city = body['city']
+
+            print(age, gender, country, city)
+
+            url = 'https://imgur.com/Sc59JV1'
 
             city_rank = [{'name': 'taiwan', 'prob': 50}, {'name': 'china', 'prob': 50}]
             city_rank_to_db = 'taiwan,50;china,50;'

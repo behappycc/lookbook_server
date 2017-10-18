@@ -19,6 +19,6 @@ from quickstart.views import FileUploadView, GetUserView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^upload/(?P<filename>[^/]+)$', FileUploadView.as_view()),
+    url(r'^upload/$', FileUploadView.as_view()),
     url(r'^api/v1.0/user/(?P<id>[0-9]+)/$', GetUserView.as_view()),
 ]
