@@ -13,3 +13,59 @@
 `$ python manage.py runserver`
 
 `Starting development server at http://127.0.0.1:8000/`
+
+## API
+
+GET `api/v1.0/user/[id]/`
+
+Response body
+
+```
+{
+  "city":"14",
+  "gender":"male",
+  "age":"14",
+  "rank":[
+    {
+      "name":"Rio De Janeiro",
+      "prob":"44.8"
+    },
+    {
+      "name":"Prague",
+      "prob":"24.1"
+    },
+    {
+      "name":"Helsinki",
+      "prob":"8.4"
+    },
+    {
+      "name":"Casablanca",
+      "prob":"4.7"
+    },
+    {
+      "name":"Berlin",
+      "prob":"3.0"
+    },
+    {
+      "name":"others",
+      "prob":"15.0"
+    }
+  ],
+  "country":"14","id":"14",
+  "imgUrl":"https://i.imgur.com/Sc59JV1.jpg"
+}
+```
+
+POST `upload/`
+
+Request body:
+
+```
+{
+  gender: "male", 
+  age: "100", 
+  country: "country", 
+  city: "city", 
+  imgUrl: "some.png"
+}
+```
