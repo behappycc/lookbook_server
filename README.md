@@ -56,7 +56,7 @@ Response body
 }
 ```
 
-POST `upload/`
+POST `upload/[filen-ame]`
 
 Request body:
 
@@ -66,6 +66,6 @@ Request body:
   age: "100", 
   country: "country", 
   city: "city", 
-  imgUrl: "some.png"
+  image: "FILE"
 }
 ```
