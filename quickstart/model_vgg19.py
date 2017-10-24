@@ -51,6 +51,9 @@ set_keras_backend("theano")
 # from topImageWalk import topClassic
 
 def vgg19(X_train):
+	print('file exist?', os.path.isfile('/Users/wtlin/Projects/lookbook_server/quickstart/weights/Best_ModelAPI_SGD_weights.h5'))
+	print('file exist?', os.path.isfile('/Users/wtlin/Projects/lookbook_server/quickstart/views.py'))
+
 	t_start = time.time()
 	print (X_train.shape)
 
@@ -154,12 +157,13 @@ def vgg19(X_train):
 	print('Loading weights......')
     # PROJECT_PATH = os.path.realpath('/home/ubuntu/workspace/lookbook/lookbook_server/quickstart/weigths/Best_ModelAPI_SGD_weights.h5')
 	
-	model.load_weights('/home/ubuntu/workspace/lookbook/lookbook_server/quickstart/weigths/Best_ModelAPI_SGD_weights.h5')
+	# model.load_weights('/home/ubuntu/workspace/lookbook/lookbook_server/quickstart/weigths/Best_ModelAPI_SGD_weights.h5')
 	# model.load_weights(PROJECT_PATH)
+	model.load_weights('/Users/wtlin/Projects/lookbook_server/quickstart/weights/Best_ModelAPI_SGD_weights.h5')
 	print("Loaded model from disk")
 	predict = model.predict(X_train, batch_size=batch_size, verbose=0)
-    
-	
+
+
 	# pre_class=model.predict_classes(X_train, batch_size=batch_size, verbose=1)
 	# pre_proba=model.predict_proba(X_train, batch_size=batch_size, verbose=1)
 

@@ -33,12 +33,32 @@ class FileUploadView(views.APIView):
     def post(self, request, filename, format=None):
         try:
             file_obj = request.data['image']
+            file_obj_copy = copy.deepcopy(file_obj)
+
             image_chunk = file_obj.read()
             url = imgurRequests(image_chunk)
 
+            # vgg model
+            img = Image.open(file_obj_copy)
+            process = preprocess(img)
+            result_predict = vgg19(process)
+            raw_city_rank = rank(result_predict)
+            city_rank = [{ 'name': city_name, 'prob': prob } for city_name, prob in raw_city_rank]
+
             # TODO: rank should be replaced with vgg model prediction
             # rank should be transform to this structure
-            city_rank_to_db = 'Rio De Janeiro,44.8;Prague,24.1;Helsinki,8.4;Casablanca,4.7;Berlin,3.0;others,15.0'
+            # city_rank_to_db = 'Rio De Janeiro,44.8;Prague,24.1;Helsinki,8.4;Casablanca,4.7;Berlin,3.0;others,15.0'
+
+
+            city_rank_to_db = '{},{};{},{};{},{};{},{};{},{};{},{};'.format(
+                city_rank['city'][0],city_rank['prob'][0],
+                city_rank['city'][1],city_rank['prob'][1],
+                city_rank['city'][2],city_rank['prob'][2],
+                city_rank['city'][3],city_rank['prob'][3],
+                city_rank['city'][4],city_rank['prob'][4],
+                city_rank['city'][5],city_rank['prob'][5],
+                city_rank['city'][6],city_rank['prob'][6])
+
 
             user = User.objects.create(
                 age=request.data['age'],
@@ -86,4 +106,5 @@ class GetUserView(generics.RetrieveAPIView):
         }
 
         return Response(content, status=200)
+
 
